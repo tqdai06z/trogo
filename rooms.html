@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Roomie AI - Hệ Thống Tìm Kiếm Phòng Trọ Thông Minh</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/rooms.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+
+<body>
+
+  <main class="page-main">
+
+    <header class="dashboard-header">
+    </header>
+
+    <section class="glass-panel filter-panel">
+
+      <div class="filter-row">
+
+        <div class="filter-col">
+          <label class="filter-label" for="city-select">🗺️ Thành phố</label>
+
+          <div class="select-wrap">
+            <select id="city-select">
+              <option value="hcm">TP. Hồ Chí Minh</option>
+              <option value="hn" disabled>Hà Nội (Sắp mở)</option>
+              <option value="dn" disabled>Đà Nẵng (Sắp mở)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-col filter-col--grow">
+          <label class="filter-label" for="search-input">🔍 Từ khóa thông minh</label>
+
+          <div class="input-icon-wrap">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Nhập tên đường, trường đại học, địa điểm..."
+            >
+          </div>
+        </div>
+
+        <div class="filter-col">
+          <label class="filter-label" for="sort-select">↕️ Sắp xếp giá</label>
+
+          <div class="select-wrap">
+            <select id="sort-select">
+              <option value="default">Mặc định</option>
+              <option value="price-asc">Giá tăng dần ↑</option>
+              <option value="price-desc">Giá giảm dần ↓</option>
+              <option value="area-desc">Diện tích rộng nhất</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="filter-divider">
+
+      <div class="chips-group">
+        <p class="chips-label">📍 Khu vực trọng điểm:</p>
+
+        <div class="chips-row" id="district-filter-group">
+          <button type="button" data-value="Tất cả" class="filter-chip filter-chip-active">Tất cả</button>
+          <button type="button" data-value="Bình Thạnh" class="filter-chip filter-chip-inactive">Bình Thạnh</button>
+          <button type="button" data-value="Thủ Đức" class="filter-chip filter-chip-inactive">Thủ Đức</button>
+          <button type="button" data-value="Quận 1" class="filter-chip filter-chip-inactive">Quận 1</button>
+          <button type="button" data-value="Gò Vấp" class="filter-chip filter-chip-inactive">Gò Vấp</button>
+          <button type="button" data-value="Quận 7" class="filter-chip filter-chip-inactive">Quận 7</button>
+        </div>
+      </div>
+
+      <div class="chips-group">
+        <p class="chips-label">💰 Ngân sách thuê trọ:</p>
+
+        <div class="chips-row" id="price-filter-group">
+          <button type="button" data-value="Tất cả" class="filter-chip filter-chip-active">Tất cả</button>
+          <button type="button" data-value="duoi-2" class="filter-chip filter-chip-inactive">Dưới 2 triệu</button>
+          <button type="button" data-value="2-3.5" class="filter-chip filter-chip-inactive">2 - 3.5 triệu</button>
+          <button type="button" data-value="3.5-5" class="filter-chip filter-chip-inactive">3.5 - 5 triệu</button>
+          <button type="button" data-value="tren-5" class="filter-chip filter-chip-inactive">Trên 5 triệu</button>
+        </div>
+      </div>
+
+      <div class="chips-group">
+        <p class="chips-label">🏠 Mô hình phòng:</p>
+
+        <div class="chips-row" id="type-filter-group">
+          <button type="button" data-value="Tất cả" class="filter-chip filter-chip-active">Tất cả</button>
+          <button type="button" data-value="Phòng trọ" class="filter-chip filter-chip-inactive">Phòng trọ</button>
+          <button type="button" data-value="Studio" class="filter-chip filter-chip-inactive">Studio</button>
+          <button type="button" data-value="Căn hộ mini" class="filter-chip filter-chip-inactive">Căn hộ mini</button>
+          <button type="button" data-value="Duplex" class="filter-chip filter-chip-inactive">Duplex</button>
+        </div>
+      </div>
+
+      <div class="chips-group">
+        <p class="chips-label">✨ Tiện ích tích hợp (Chọn nhiều):</p>
+
+        <div class="chips-row" id="utilities-filter-group">
+          <button type="button" data-value="Máy lạnh" class="filter-chip filter-chip-inactive">❄️ Máy lạnh</button>
+          <button type="button" data-value="WC riêng" class="filter-chip filter-chip-inactive">🚿 WC riêng</button>
+          <button type="button" data-value="Kệ bếp" class="filter-chip filter-chip-inactive">🍳 Kệ bếp</button>
+          <button type="button" data-value="Ban công" class="filter-chip filter-chip-inactive">🌅 Ban công</button>
+          <button type="button" data-value="Gác lửng" class="filter-chip filter-chip-inactive">📐 Gác lửng</button>
+          <button type="button" data-value="Máy giặt" class="filter-chip filter-chip-inactive">🧺 Máy giặt</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="result-bar">
+      <div>
+        <span class="text-muted">Bộ lọc tìm thấy:</span>
+        <span class="result-count" id="total-rooms-count">0</span>
+        <span class="text-highlight">phòng trọ khả dụng</span>
+      </div>
+    </section>
+
+    <section id="rooms-list-container" class="rooms-list">
+    </section>
+
+  </main>
+
+  <script src="./js/components.js" data-page="rooms"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/rooms.js"></script>
+
+</body>
+</html>

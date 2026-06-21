@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Smart Search - Roomie AI</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/ai-search.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body>
+  <main class="ai-main">
+    <section class="glass-panel ai-topbar">
+      <div class="ai-topbar-left">
+        <div class="ai-avatar-wrap">
+          <div class="ai-avatar">
+            <span class="icon">AI</span>
+          </div>
+          <span class="ai-status-dot"></span>
+        </div>
+        <div>
+          <h1 class="ai-name">Roomie AI Smart Counselor</h1>
+          <p class="ai-subtitle">Trực tuyến dọn dẹp lọc trọ tự động bằng AI</p>
+        </div>
+      </div>
+
+      <button id="btn-clear-chat" class="btn-clear" type="button">
+        <span class="icon">↻</span>
+        Xóa hội thoại
+      </button>
+    </section>
+
+    <section id="chat-messages-container" class="glass-panel chat-area custom-chat-scroller">
+      <div class="chat-msg chat-msg--ai">
+        <div class="chat-icon">
+          <span class="icon">AI</span>
+        </div>
+        <div class="chat-bubble-ai">
+          <p class="chat-line">Chào mừng quý khách, tôi là <strong>Roomie AI</strong>!</p>
+          <p class="chat-line">Tôi ở đây để giúp bạn chọn phòng chính xác nhất dựa trên ngôn ngữ giao tiếp hằng ngày. Hãy mô tả mong muốn của bạn nhé.</p>
+          <p class="chat-hint">Ví dụ bạn có thể nhắn:</p>
+          <div class="chat-example">"Tôi là sinh viên cần tìm phòng trọ dưới 3.5 triệu ở Bình Thạnh, có gác lửng ban công rộng rãi"</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chat-footer">
+      <div class="chips-row" id="chat-suggestion-chips">
+        <span class="chips-hint">Gợi ý nhanh:</span>
+        <button data-prompt="Tìm phòng Quận 7 dưới 4 triệu có máy lạnh, gác lửng" class="filter-chip filter-chip-inactive" type="button">Quận 7 dưới 4tr + gác</button>
+        <button data-prompt="Cần tìm Studio Quận 1 khép kín dưới 5 triệu" class="filter-chip filter-chip-inactive" type="button">Studio Q1 dưới 5tr</button>
+        <button data-prompt="Tìm phòng trọ giá rẻ cho sinh viên ở Thủ Đức dưới 3 triệu" class="filter-chip filter-chip-inactive" type="button">Trọ rẻ Thủ Đức sinh viên</button>
+        <button data-prompt="Tìm Duplex Gò Vấp có ban công nấu ăn tự do" class="filter-chip filter-chip-inactive" type="button">Duplex Gò Vấp có ban công</button>
+      </div>
+
+      <div class="glass-panel chat-input-box">
+        <form id="chat-input-form" class="chat-form">
+          <label class="visually-hidden" for="chat-textarea-input">Nhập yêu cầu tìm kiếm</label>
+          <textarea id="chat-textarea-input" rows="1" placeholder="Nhập yêu cầu tìm kiếm... (Ví dụ: phòng trọ Bình Thạnh dưới 4 triệu)" required></textarea>
+          <button type="submit" class="chat-send-btn" title="Gửi tin nhắn">
+            <span class="icon">➤</span>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/components.js" data-page="ai-search"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/ai-search.js"></script>
+</body>
+</html>

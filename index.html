@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Roomie giúp tìm phòng trọ theo khu vực, mức giá và nhu cầu bằng bộ lọc hoặc trợ lý AI.">
+  <meta name="theme-color" content="#030712">
+  <title>Roomie - Tìm phòng trọ thông minh</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua và đến nội dung chính</a>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero-section text-center" aria-labelledby="hero-title">
+      <div class="hero-glow-sphere-1" aria-hidden="true"></div>
+      <div class="hero-glow-sphere-2" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="badge-sparkle">
+          Trải nghiệm tìm kiếm thế hệ mới
+        </div>
+
+        <h1 id="hero-title" class="hero-title display-font">
+          Tìm phòng trọ thông minh cùng <br>
+          <span class="hero-title-gradient">Roomie</span>
+        </h1>
+
+        <p class="hero-subtitle">Dễ dàng tìm nhà trọ, căn hộ dịch vụ và căn hộ mini tại thành phố Hồ Chí Minh</p>
+
+        <div class="search-box glass-panel pulse-glow-ring">
+          <form id="hero-search-form" class="search-form" action="rooms.html" method="get" role="search">
+            <div class="search-input-wrapper">
+              <label class="visually-hidden" for="hero-search-input">Nhập nhu cầu tìm phòng</label>
+              <input type="search" id="hero-search-input" name="search" class="search-input" placeholder="Ví dụ: Bình Thạnh dưới 4 triệu" autocomplete="off" required>
+            </div>
+            <button type="submit" class="search-button">
+              <span>Tìm kiếm</span>
+            </button>
+          </form>
+        </div>
+
+        <nav class="quick-tags" aria-label="Khu vực được tìm nhiều">
+            <span class="quick-tags-title">
+              Khu vực hot:
+            </span>
+            <div class="quick-tags-list">
+              <a href="rooms.html?district=Bình Thạnh" class="district-quick-pill">Bình Thạnh</a>
+              <a href="rooms.html?district=Thủ Đức" class="district-quick-pill">Thủ Đức</a>
+              <a href="rooms.html?district=Quận 1" class="district-quick-pill">Quận 1</a>
+              <a href="rooms.html?district=Gò Vấp" class="district-quick-pill">Gò Vấp</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-section">
+      <div class="container">
+        <div class="featured-header">
+          <div>
+            <span class="section-tag-small">Đề xuất cho bạn</span>
+            <h2 class="section-title display-font">
+              Phòng còn trống
+              <span class="badge-status-emerald"><span class="dot-ping"></span> Xác thực 100%</span>
+            </h2>
+          </div>
+          <a href="rooms.html" class="view-all-link text-glow-sky">
+            Xem tất cả phòng
+            <span class="icon icon-right arrow-icon">→</span>
+          </a>
+        </div>
+
+        <div id="featured-rooms-container" class="room-grid">
+          <div class="loader-container" role="status">
+            <div class="spinner" aria-hidden="true"></div>
+            <span class="visually-hidden">Đang tải phòng còn trống</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section container cta-visual-section">
+      <div class="cta-glow-overlay"></div>
+      <div class="glass-panel cta-wrapper">
+        <div class="cta-info">
+          <span class="badge-indigo-pill">TRỢ LÝ THÔNG MÌNH ROOMIE</span>
+          <h2 class="cta-title display-font">Bạn bận rộn? Hãy để trợ lý ROOMIE tìm phòng giúp bạn!</h2>
+          <p class="cta-description">Không cần chọn từng bộ lọc thủ công. Chỉ cần nhập nhu cầu tự nhiên, hệ thống sẽ phân tích và đưa ra kết quả ngay.</p>
+
+          <div class="cta-buttons">
+            <a href="ai-search.html" class="btn btn-primary">
+              <span class="icon btn-icon">AI</span>
+              Trò Chuyện Cùng ROOMIE
+            </a>
+          </div>
+        </div>
+
+        <div class="cta-mockup">
+          <div class="mockup-header-tag">Live </div>
+          <div class="mockup-chat-header">
+            <div class="bot-avatar-wrapper">
+              <span class="icon bot-avatar-icon"></span>
+            </div>
+            <div>
+              <div class="bot-name">Roomie AI</div>
+              <div class="bot-status"><span class="status-dot"></span> Trực tuyến</div>
+            </div>
+          </div>
+
+          <div class="chat-messages-preview">
+            <div class="msg-bubble incoming">
+              <p>Chào bạn! Tôi có thể hỗ trợ gì cho bạn trong việc tìm trọ hôm nay?</p>
+            </div>
+            <div class="msg-bubble outgoing">
+              <p>Tôi cần tìm phòng dưới 3.5 triệu ở Gò Vấp có gác lửng</p>
+            </div>
+            <div class="msg-bubble incoming flex-item">
+              <span class="icon sparkle-icon spinner-slow">✦</span>
+              <div>Roomie AI đề xuất <strong class="highlight-text">Studio Phan Văn Trị</strong> có gác lửng và ban công thoáng khí.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section features-band">
+      <div class="container section-centered">
+        <span class="section-tag-small">Tính năng vượt trội</span>
+        <h2 class="section-large-title display-font">Vì Sao Nên Chọn Roomie AI?</h2>
+        <p class="section-subtitle">Được tối ưu để đem lại trải nghiệm tìm nơi ở nhanh, đáng tin cậy cho học sinh, sinh viên và nhân viên văn phòng.</p>
+      </div>
+
+      <div class="features-grid container">
+        <article class="feature-card glass-panel">
+          <div class="feature-icon icon-sky"><span class="icon">✓</span></div>
+          <h3 class="feature-title display-font">Thông Tin Xác Thực</h3>
+          <p class="feature-desc">Mọi phòng trọ đều được kiểm duyệt về giá cả, hình ảnh, diện tích và tính pháp lý.</p>
+        </article>
+
+        <article class="feature-card glass-panel">
+          <div class="feature-icon icon-indigo"><span class="icon">AI</span></div>
+          <h3 class="feature-title display-font">Trợ Lý AI Lọc Nhu Cầu</h3>
+          <p class="feature-desc">Tìm phòng bằng ngôn ngữ tự nhiên, tiết kiệm thời gian lướt và gọi điện thủ công.</p>
+        </article>
+
+        <article class="feature-card glass-panel">
+          <div class="feature-icon icon-purple"><span class="icon">📅</span></div>
+          <h3 class="feature-title display-font">Đặt Lịch Xem Nhanh</h3>
+          <p class="feature-desc">Chọn ngày giờ thuận tiện qua biểu mẫu, đặt lịch xem trực tiếp chỉ trong vài bước.</p>
+        </article>
+
+        <article class="feature-card glass-panel">
+          <div class="feature-icon icon-teal"><span class="icon">#</span></div>
+          <h3 class="feature-title display-font">Giá Cả Minh Bạch</h3>
+          <p class="feature-desc">Cam kết giá đúng sự thật, không phụ phí ẩn, chi phí dịch vụ được giải trình rõ ràng.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/components.js" data-page="home"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/home.js"></script>
+</body>
+</html>

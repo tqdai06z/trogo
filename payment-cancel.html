@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giao dịch bị hủy - Roomie AI</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #0f172a, #020617);
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .cancel-container {
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .status-icon-cancel {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 2px solid rgba(239, 68, 68, 0.3);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .result-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ef4444;
+      margin-bottom: 12px;
+    }
+
+    .result-desc {
+      color: #94a3b8;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .option-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .option-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .option-desc {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-action {
+      display: block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.25s ease;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .btn-retry {
+      background-color: #007bff;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-retry:hover {
+      background-color: #0056b3;
+      transform: translateY(-1px);
+    }
+
+    .btn-back-rooms {
+      background-color: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-back-rooms:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="cancel-container">
+    <div class="status-icon-cancel">✕</div>
+
+    <h1 class="result-title">Bạn đã hủy thanh toán</h1>
+    <p class="result-desc">
+      Giao dịch nạp thanh toán cọc giữ chỗ xem phòng trọ Roomie AI đã bị huỷ bỏ theo yêu cầu của bạn hoặc đã bị quá giờ chuyển tiền.
+    </p>
+
+    <div class="option-card">
+      <h2 class="option-title">💡 Bạn vẫn muốn giữ chỗ xem phòng chứ?</h2>
+      <p class="option-desc">
+        Khoản cọc 50,000 VND giúp chúng tôi xác thực cuộc hẹn và ưu tiên giữ phòng còn trống cho bạn trong 24h. Bạn vẫn có thể gửi lại yêu cầu thanh toán hoặc liên hệ trực tiếp với chủ trọ bất cứ lúc nào.
+      </p>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-action btn-retry" onclick="retryPayment()">
+        🔄 Thử đặt và thanh toán lại
+      </button>
+      <a href="rooms.html" class="btn-action btn-back-rooms">
+        🏠 Tìm phòng trọ khác
+      </a>
+      <a href="index.html" style="color: #64748b; font-size: 13px; text-decoration: underline; margin-top: 8px;">
+        Quay lại Trang chủ Roomie
+      </a>
+    </div>
+  </main>
+
+  <script>
+    // Hàm phụ khôi phục đơn đặt và dẫn lại sang trang đặt phòng tương thích
+    function retryPayment() {
+      // Đọc phòng trọ đã và đang xem dở từ localStorage
+      const lastOrderCode = localStorage.getItem("roomie_current_order_code");
+      
+      // Đồng bộ trạng thái hủy cục bộ
+      if (lastOrderCode) {
+        try {
+          const appointments = JSON.parse(localStorage.getItem("roomie_appointments") || "[]");
+          const updated = appointments.map(appt => {
+            if (appt.orderCode === Number(lastOrderCode)) {
+              appt.paymentStatus = "CANCELLED";
+            }
+            return appt;
+          });
+          localStorage.setItem("roomie_appointments", JSON.stringify(updated));
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      
+      // Chuyển hướng người dùng về lại trang danh sách phòng để họ chọn đăng ký lại
+      window.location.href = "rooms.html";
+    }
+  </script>
+</body>
+</html>

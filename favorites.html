@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Phòng Trọ Yêu Thích - Roomie AI</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+
+<body>
+  <!-- Nội dung chính của trang -->
+  <main class="page-main">
+
+    <!-- Tiêu đề trang -->
+    <header class="page-heading">
+      <span class="page-tag">Quản lý tiện ích</span>
+
+      <h1 class="page-title display-font">
+        Phòng Trọ Đã Lưu Yêu Thích
+
+        <span class="badge-count">
+          <span class="fav-count-badge">0</span>
+          danh mục
+        </span>
+      </h1>
+
+      <p class="page-subtitle">
+        Theo dõi và sắp xếp đặt lịch hẹn xem phòng của các căn hộ bạn ưng ý nhất.
+      </p>
+    </header>
+
+    <!-- Danh sách phòng yêu thích -->
+    <section id="favorites-list-container" class="card-grid">
+      <div class="list-loader">
+        <div class="spinner"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script src="./js/components.js" data-page="favorites"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/favorites.js"></script>
+</body>
+</html>

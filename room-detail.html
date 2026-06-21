@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Tiết Phòng Trọ - Roomie AI</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/detail.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+
+<body>
+
+  <main class="detail-main" id="detail-main-wrapper">
+
+    <section class="back-link-wrap">
+      <a href="rooms.html" class="back-link">
+        <span class="icon">←</span>
+        Trở lại danh sách phòng
+      </a>
+    </section>
+
+    <section id="detail-loader" class="detail-loader">
+      <div class="spinner"></div>
+      <p>Đang truy vấn thông tin căn hộ...</p>
+    </section>
+
+    <section id="detail-content-area" class="detail-layout hidden">
+
+      <article class="detail-left">
+
+        <section class="glass-panel detail-panel">
+
+          <div class="room-preview">
+            <img
+              id="main-preview-img"
+              src=""
+              alt="Hình ảnh phòng trọ"
+              referrerpolicy="no-referrer"
+            >
+
+            <span class="verified-badge">
+              <span class="icon">✓</span>
+              Xác thực bởi Roomie AI
+            </span>
+          </div>
+
+          <div class="thumbnail-grid" id="thumbnails-wrapper"></div>
+
+        </section>
+
+        <section class="glass-panel detail-panel">
+
+          <div class="detail-header">
+            <h1 id="detail-title" class="detail-title"></h1>
+
+            <div class="detail-meta">
+              <span>
+                <span class="icon">#</span>
+                Loại hình:
+                <strong id="detail-type">Studio</strong>
+              </span>
+
+              <span class="meta-separator"></span>
+
+              <span>
+                <span class="icon">□</span>
+                Diện tích:
+                <strong id="detail-area">25m²</strong>
+              </span>
+
+              <span class="meta-separator"></span>
+
+              <span>
+                <span class="icon">#</span>
+                Mã phòng:
+                <strong id="detail-code">RM1001</strong>
+              </span>
+            </div>
+          </div>
+
+          <hr class="divider-line">
+
+          <section>
+            <h2 class="section-small-title">Vị trí và địa chỉ</h2>
+
+            <p class="address-line">
+              <span class="icon">📍</span>
+              <span id="detail-address"></span>
+            </p>
+          </section>
+
+          <hr class="divider-line">
+
+          <section>
+            <h2 class="section-small-title">Mô tả chi tiết phòng trọ</h2>
+
+            <p id="detail-description" class="detail-description"></p>
+          </section>
+
+          <hr class="divider-line">
+
+          <section>
+            <h2 class="section-small-title">Các tiện ích sẵn có</h2>
+
+            <div class="utilities-grid" id="detail-utilities-grid"></div>
+          </section>
+
+          <hr class="divider-line">
+
+          <section>
+            <h2 class="section-small-title">
+              <span class="icon">👥</span>
+              Đối tượng phù hợp nhất
+            </h2>
+
+            <div class="pill-row" id="detail-suitable-group"></div>
+          </section>
+
+        </section>
+
+      </article>
+
+      <aside class="detail-sidebar">
+
+        <section class="glass-panel detail-panel">
+
+          <div class="status-row">
+            <span class="status-label">Trạng thái thuê</span>
+            <span id="detail-status" class="status-badge">Còn phòng</span>
+          </div>
+
+          <div class="price-box">
+            <span class="price-label">Giá thuê phòng:</span>
+            <span id="detail-price" class="price-value"></span>
+            <span class="price-unit">/ tháng</span>
+          </div>
+
+          <div class="owner-card">
+
+            <div class="owner-avatar" id="detail-owner-avatar">AD</div>
+
+            <div>
+              <p class="owner-role">Tư vấn viên / Chủ trọ</p>
+              <p class="owner-name" id="detail-owner-name">Tuấn Anh</p>
+
+              <p class="owner-phone">
+                <span class="icon">☎</span>
+                <span id="detail-owner-phone">0901...</span>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="detail-actions">
+
+            <button id="btn-nav-booking" class="btn-primary-action" type="button">
+              <span class="icon">📅</span>
+              Đặt lịch xem phòng ngay
+            </button>
+
+            <button id="btn-toggle-favorite" class="btn-secondary-action btn-favorite" type="button">
+              <span class="icon">♡</span>
+              <span>Lưu phòng yêu thích</span>
+            </button>
+
+          </div>
+
+          <p class="legal-note">
+            Mỗi thông tin đăng tải được Roomie AI bảo vệ quyền pháp lý và đảm bảo chất lượng thật như cam kết hiển thị.
+          </p>
+
+        </section>
+
+      </aside>
+
+    </section>
+
+    <section class="similar-section">
+
+      <div class="similar-heading">
+        <span class="page-tag">Đề xuất cho bạn</span>
+        <h2 class="page-title display-font">Gợi Ý Phòng Tương Tự</h2>
+      </div>
+
+      <div id="similar-rooms-row" class="similar-grid"></div>
+
+    </section>
+
+  </main>
+
+  <script src="./js/components.js" data-page="room-detail"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/room-detail.js"></script>
+
+</body>
+</html>
+```

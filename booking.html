@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặt Lịch Xem Phòng - Roomie AI</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <style>
+    .field-with-icon .form-input, 
+    .field-with-icon .form-select {
+      padding-left: 1rem !important;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="booking-main">
+    
+    <header class="booking-header">
+      <h1 class="page-title display-font">Đặt Lịch Hẹn Xem Phòng Trọ</h1>
+      <p class="page-subtitle">Chọn lịch xem phòng cùng người cho thuê hoặc ban tư vấn của Roomie AI một cách tiện lợi.</p>
+    </header>
+
+    <section class="booking-layout">
+      
+      <div class="glass-panel booking-form-panel">
+        <form id="booking-schedule-form" class="booking-form">
+          
+          <div class="form-group">
+            <label class="form-label" for="book-name-input">Họ và tên của quý khách</label>
+            <div class="field-with-icon">
+              <input type="text" id="book-name-input" class="form-input" placeholder="Nguyễn Văn A" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="book-phone-input">Số điện thoại liên hệ</label>
+            <div class="field-with-icon">
+              <input type="tel" id="book-phone-input" class="form-input" placeholder="09xx xxx xxx" pattern="[0-9+]{8,15}" required>
+            </div>
+          </div>
+
+          <div class="form-row form-row-two">
+            <div class="form-group">
+              <label class="form-label" for="book-date-input">Chọn ngày hẹn xem</label>
+              <div class="field-with-icon">
+                <input type="date" id="book-date-input" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-time-input">Chọn khung giờ hợp lý</label>
+              <div class="field-with-icon">
+                <select id="book-time-input" class="form-select" required>
+                  <option value="">-- Chọn khung giờ --</option>
+                  <option value="08:00 - 10:00">08:00 - 10:00 (Sáng)</option>
+                  <option value="10:00 - 12:00">10:00 - 12:00 (Sáng)</option>
+                  <option value="13:30 - 15:30">13:30 - 15:30 (Chiều)</option>
+                  <option value="15:30 - 17:30">15:30 - 17:30 (Chiều)</option>
+                  <option value="18:00 - 20:00">18:00 - 20:50 (Tối)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="book-notes-input">Ghi chú </label>
+            <textarea id="book-notes-input" class="form-textarea" rows="3" placeholder="Ví dụ: Mong muốn xem phòng ngoài giờ làm việc, hoặc có thể thương lượng giá thuê..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary-action">
+            Gửi yêu cầu hẹn lịch
+          </button>
+        </form>
+      </div>
+
+      <aside class="glass-panel booking-room-panel">
+        <h2 class="panel-title">Phòng trọ đã chọn</h2>
+        <div id="booking-room-widget">
+          <div class="widget-loader">
+            <div class="spinner"></div>
+            <span>Đang giải mã thông tin phòng...</span>
+          </div>
+        </div>
+      </aside>
+      
+    </section>
+  </main>
+
+  <script src="./js/components.js" data-page="booking"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/payment.js"></script>
+  <script src="./js/booking.js"></script>
+</body>
+</html>

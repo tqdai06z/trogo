@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xác nhận thanh toán - Roomie AI</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <style>
+    /* Style độc lập bóng bẩy cho trang thông báo kết quả */
+    body {
+      background: radial-gradient(circle at top left, #0f172a, #020617);
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .success-container {
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      transform: translateY(0);
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Thiết kế vòng tròn tích xanh hiệu ứng xoay */
+    .status-icon-wrap {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      transition: all 0.3s ease;
+    }
+
+    .icon-success {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .icon-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 2px solid rgba(245, 158, 11, 0.3);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+      animation: spinY 2s infinite linear;
+    }
+
+    @keyframes spinY {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    .result-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .result-desc {
+      color: #94a3b8;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Bảng chi tiết hóa đơn */
+    .invoice-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .invoice-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+      font-size: 14px;
+    }
+
+    .invoice-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      font-weight: 600;
+    }
+
+    .invoice-row span:first-child {
+      color: #64748b;
+    }
+
+    .invoice-row span:last-child {
+      color: #e2e8f0;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-paid {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+    }
+
+    /* Các nút điều hướng */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-action {
+      display: block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-home {
+      background-color: #007bff;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-home:hover {
+      background-color: #0056b3;
+      transform: translateY(-1px);
+    }
+
+    .btn-recheck {
+      background-color: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-recheck:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="success-container" id="payment-success-card">
+    <!-- Icon hiển thị trạng thái động -->
+    <div class="status-icon-wrap icon-pending" id="status-icon">⌛</div>
+
+    <h1 class="result-title" id="payment-title">Đang xác thực giao dịch...</h1>
+    <p class="result-desc" id="payment-desc">Roomie AI đang kiểm tra tín hiệu đối soát thanh toán cọc giữ chỗ từ ngân hàng qua hệ thống payOS.</p>
+
+    <!-- Bảng thông tin thanh toán -->
+    <section class="invoice-card">
+      <div class="invoice-row">
+        <span>Mã đơn đơn hàng (Code)</span>
+        <span id="show-order-code">------</span>
+      </div>
+      <div class="invoice-row">
+        <span>Khách đặt lịch</span>
+        <span id="show-customer">Nguyễn Văn A</span>
+      </div>
+      <div class="invoice-row">
+        <span>Tiền cọc giữ chỗ</span>
+        <span>50,000 VND</span>
+      </div>
+      <div class="invoice-row">
+        <span>Mục đích cọc</span>
+        <span>Cọc lịch hẹn xem phòng</span>
+      </div>
+      <div class="invoice-row">
+        <span>Trạng thái đơn</span>
+        <span id="show-status"><strong class="badge-status badge-pending">ĐANG KIỂM TRA</strong></span>
+      </div>
+    </section>
+
+    <!-- Nút bấm tương tác -->
+    <div class="btn-group">
+      <button class="btn-action btn-recheck" id="btn-sync" onclick="verifyInvoiceStatus()">
+        🔄 Nhấp để đồng bộ trạng thái
+      </button>
+      <a href="my-bookings.html" class="btn-action btn-home">
+        📅 Đi tới lịch hẹn của tôi
+      </a>
+      <a href="rooms.html" style="color: #64748b; font-size: 13px; text-decoration: underline; margin-top: 8px;">
+        Về lại danh sách phòng trọ
+      </a>
+    </div>
+  </main>
+
+  <script src="./js/payment.js"></script>
+  <script>
+    // Lấy mã đơn hàng từ thanh địa chỉ URL hoặc từ localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    let orderCode = urlParams.get('orderCode');
+    
+    if (!orderCode) {
+      orderCode = localStorage.getItem("roomie_current_order_code");
+    }
+
+    const BACKEND_URL = window.ROOMIE_BACKEND_URL || "https://YOUR_RENDER_BACKEND_URL.onrender.com";
+
+    // Chạy việc check trạng thái ngay khi mở màn hình
+    document.addEventListener("DOMContentLoaded", function() {
+      if (orderCode) {
+        document.getElementById("show-order-code").innerText = "#" + orderCode;
+        verifyInvoiceStatus();
+        
+        // Tự động kiểm tra định kỳ (polling) cứ mỗi 3 giây trong vòng 15 giây đầu
+        let checkCount = 0;
+        const intervalId = setInterval(async () => {
+          checkCount++;
+          const finalPaid = await verifyInvoiceStatus();
+          if (finalPaid || checkCount >= 5) {
+            clearInterval(intervalId);
+          }
+        }, 3000);
+      } else {
+        document.getElementById("payment-title").innerText = "Không tìm thấy dữ liệu hóa đơn";
+        document.getElementById("payment-desc").innerText = "Bạn chưa thực hiện giao dịch thanh toán hoặc mã đơn hàng đã bị hết hiệu lực.";
+        document.getElementById("status-icon").innerText = "❓";
+        document.getElementById("status-icon").className = "status-icon-wrap icon-pending";
+        document.getElementById("btn-sync").style.display = "none";
+      }
+    });
+
+    /**
+     * Nhận diện và đồng bộ trạng thái thanh toán từ API Backend
+     * @returns {Promise<boolean>} Trả về true nếu đã PAID thành công
+     */
+    async function verifyInvoiceStatus() {
+      if (!orderCode) return false;
+
+      const btnSync = document.getElementById("btn-sync");
+      if (btnSync) {
+        btnSync.innerText = "⏳ Đang kết nối...";
+        btnSync.disabled = true;
+      }
+
+      try {
+        // Gọi API truy vấn trạng thái hóa đơn
+        const response = await fetch(`${BACKEND_URL}/api/payment-status/${orderCode}`);
+        const result = await response.json();
+
+        console.log("Trạng thái hóa đơn nhận được:", result);
+
+        if (btnSync) {
+          btnSync.innerText = "🔄 Nhấp để đồng bộ trạng thái";
+          btnSync.disabled = false;
+        }
+
+        const iconEl = document.getElementById("status-icon");
+        const titleEl = document.getElementById("payment-title");
+        const descEl = document.getElementById("payment-desc");
+        const statusEl = document.getElementById("show-status");
+        const customerEl = document.getElementById("show-customer");
+
+        if (result.customerName) {
+          customerEl.innerText = result.customerName;
+        }
+
+        // 1. Trường hợp THANH TOÁN THÀNH CÔNG (PAID)
+        if (result.status === "PAID") {
+          iconEl.innerText = "✓";
+          iconEl.className = "status-icon-wrap icon-success";
+          titleEl.innerText = "Thanh toán thành công!";
+          titleEl.style.color = "#10b981";
+          descEl.innerText = "Chúc mừng quý khách! Khoản tiền cọc giữ chỗ 50,000 VND đã được ghi nhận. Chủ phòng trọ sẽ sớm liên hệ xác nhận lịch hẹn xem.";
+          statusEl.innerHTML = `<span class="badge-status badge-paid">ĐÃ THANH TOÁN ✅</span>`;
+          
+          // Đồng bộ lại trạng thái cọc PAID vào roomie_appointments lưu trữ tại localStorage của client cho đồng nhất
+          updateLocalAppointmentStatus(orderCode, "PAID");
+          return true;
+        } 
+        // 2. Trường hợp ĐÃ BỊ HỦY (CANCELLED)
+        else if (result.status === "CANCELLED") {
+          iconEl.innerText = "✕";
+          iconEl.className = "status-icon-wrap icon-pending";
+          iconEl.style.background = "rgba(239, 68, 68, 0.15)";
+          iconEl.style.color = "#ef4444";
+          iconEl.style.border = "2px solid rgba(239, 68, 68, 0.3)";
+          iconEl.style.boxShadow = "0 0 20px rgba(239, 68, 68, 0.2)";
+          
+          titleEl.innerText = "Thanh toán bị hủy!";
+          titleEl.style.color = "#ef4444";
+          descEl.innerText = "Phiên giao dịch cọc giữ chỗ đã bị bạn hủy bỏ hoặc có sự cố xảy ra trong quá trình chuyển tiền.";
+          statusEl.innerHTML = `<span class="badge-status" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">ĐÃ HỦY ✕</span>`;
+          
+          updateLocalAppointmentStatus(orderCode, "CANCELLED");
+          return true;
+        }
+        // 3. Trường hợp CHỜ THANH TOÁN (PENDING)
+        else {
+          iconEl.innerText = "⌛";
+          iconEl.className = "status-icon-wrap icon-pending";
+          titleEl.innerText = "Đang chờ xác nhận thanh toán";
+          titleEl.style.color = "#fbbf24";
+          descEl.innerText = "Hệ thống chưa nhận được tín hiệu hồi đáp từ payOS. Nếu bạn đã hoàn thành chuyển khoản, vui lòng đợi 10-20 giây để ngân hàng đối soát.";
+          statusEl.innerHTML = `<span class="badge-status badge-pending">CHỜ CHUYỂN TIỀN ⌛</span>`;
+          return false;
+        }
+
+      } catch (error) {
+        console.error("Lỗi đồng bộ trạng thái đơn hàng:", error);
+        if (btnSync) {
+          btnSync.innerText = "⚠️ Thử lại (Lỗi mạng)";
+          btnSync.disabled = false;
+        }
+        return false;
+      }
+    }
+
+    /**
+     * Đồng bộ đổi trạng thái thanh toán từ PENDING sang PAID / CANCELLED trong lịch sử appointments local
+     */
+    function updateLocalAppointmentStatus(code, targetStatus) {
+      try {
+        const appointments = JSON.parse(localStorage.getItem("roomie_appointments") || "[]");
+        let modified = false;
+        const updated = appointments.map(appt => {
+          if (appt.orderCode === Number(code)) {
+            appt.paymentStatus = targetStatus;
+            modified = true;
+          }
+          return appt;
+        });
+        if (modified) {
+          localStorage.setItem("roomie_appointments", JSON.stringify(updated));
+          console.log(`[Local Sync] Đã cập nhật trạng thái đơn #${code} thành ${targetStatus}`);
+        }
+      } catch (e) {
+        console.error("Lỗi đồng bộ local storage:", e);
+      }
+    }
+  </script>
+</body>
+</html>

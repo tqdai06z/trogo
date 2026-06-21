@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Tin Cho Thuê Phòng - Roomie</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  
+  <style>
+    /* BỐ CỤC CĂN GIỮA TOÀN TRANG */
+    .post-main {
+      max-width: 850px;         
+      margin: 0 auto;           
+      padding: 40px 20px;       
+    }
+
+    /* KHỐI TIÊU ĐỀ ĐẦU TRANG - CĂN GIỮA HOÀN TOÀN */
+    .page-heading {
+      text-align: center;       
+      margin-bottom: 35px;      
+    }
+
+    /* Đảm bảo dòng chữ phụ luôn luôn ở giữa */
+    .page-subtitle {
+      text-align: center;
+      margin: 10px auto 0 auto;
+      max-width: 600px; 
+    }
+
+    /* ĐỊNH DẠNG CHỮ BÁO LỖI MÀU ĐỎ (LAB 7) */
+    .error-msg {
+      color: red;
+      font-size: 13px;
+      display: block;
+      margin-top: 5px;
+      font-weight: bold;
+      text-align: left;         
+    }
+
+    .form-group, .form-section-title, .form-label {
+      text-align: left;
+    }
+
+    /* PHẦN KHUNG CHỨA 2 NÚT HÀNH ĐỘNG */
+    .form-actions {
+      display: flex;            
+      justify-content: center;  
+      align-items: center;      
+      gap: 20px;                
+      margin-top: 40px;         
+    }
+
+    /* NÚT HỦY TIN ĐĂNG */
+    .btn-cancel {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    /* CSS NÚT ĐĂNG TIN CĂN GIỮA CHỮ TRÊN NỀN XANH */
+    .btn-submit {
+      display: inline-flex;     
+      justify-content: center;  
+      align-items: center;      
+      
+      background-color: #007bff;
+      color: #ffffff;           
+      border: none;             
+      
+      padding: 12px 28px;       
+      font-size: 16px;          
+      font-weight: 600;         
+      border-radius: 8px;       
+      cursor: pointer;          
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2); 
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 16px rgba(0, 123, 255, 0.35); 
+      transform: translateY(-1px); 
+    }
+  </style>
+</head>
+<body>
+  <main class="post-main">
+    
+    <section class="page-heading">
+      <span class="page-tag">Dành cho chủ phòng trọ / môi giới</span>
+      <h1 class="page-title display-font">Đăng Tin Cho Thuê Phòng Trọ</h1>
+      <p class="page-subtitle">Mở rộng tệp khách hàng tiềm năng, tiếp cận sinh viên và nhân viên văn phòng nhanh hơn cùng Roomie</p>
+    </section>
+
+    <section class="post-panel">
+      <form id="post-room-form" class="post-form">
+        
+        <section class="post-form-section">
+          <h2 class="form-section-title"><span class="section-number">1</span> Thông tin tổng thể căn hộ</h2>
+
+          <div class="form-group">
+            <label class="form-label" for="post-title">Tiêu đề tin đăng <span class="required-mark">*</span></label>
+            <input type="text" id="post-title" class="form-input" placeholder="Ví dụ: Phòng Studio ban công thoáng mát ngay IUH Bình Thạnh full nội thất">
+            <span class="error-msg" id="title-error"></span>
+          </div>
+
+          <div class="form-row form-row-three">
+            <div class="form-group">
+              <label class="form-label" for="post-type">Loại hình phòng <span class="required-mark">*</span></label>
+              <select id="post-type" class="form-select">
+                <option value="">-- Chọn loại phòng --</option>
+                <option>Phòng trọ</option>
+                <option>Studio</option>
+                <option>Căn hộ mini</option>
+                <option>Duplex</option>
+                <option>Ở ghép</option>
+              </select>
+              <span class="error-msg" id="type-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-price">Giá thuê (VND/tháng) <span class="required-mark">*</span></label>
+              <input type="text" id="post-price" class="form-input" placeholder="Ví dụ: 3500000">
+              <span class="error-msg" id="price-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-area">Diện tích (m²) <span class="required-mark">*</span></label>
+              <input type="text" id="post-area" class="form-input" placeholder="Ví dụ: 25">
+              <span class="error-msg" id="area-error"></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="post-form-section">
+          <h2 class="form-section-title"><span class="section-number">2</span> Vị trí và địa chỉ chi tiết</h2>
+
+          <div class="form-row form-row-two">
+            <div class="form-group">
+              <label class="form-label" for="post-district">Quận / Huyện <span class="required-mark">*</span></label>
+              <select id="post-district" class="form-select">
+                <option value="">-- Chọn quận huyện --</option>
+                <option>Bình Thạnh</option>
+                <option>Thủ Đức</option>
+                <option>Gò Vấp</option>
+                <option>Quận 7</option>
+                <option>Quận 1</option>
+              </select>
+              <span class="error-msg" id="district-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-ward">Phường / Xã <span class="required-mark">*</span></label>
+              <input type="text" id="post-ward" class="form-input" placeholder="Ví dụ: Phường 15">
+              <span class="error-msg" id="ward-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="post-address-detail">Số nhà, tên đường chi tiết <span class="required-mark">*</span></label>
+            <input type="text" id="post-address-detail" class="form-input" placeholder="Ví dụ: 12/4b Nguyễn Gia Trí, Phường 25">
+            <span class="error-msg" id="address-error"></span>
+          </div>
+        </section>
+
+        <section class="post-form-section">
+          <h2 class="form-section-title"><span class="section-number">3</span> Tiện ích và đối tượng</h2>
+
+          <div class="form-group">
+            <span class="form-label">Tích chọn các tiện ích đi kèm</span>
+            <div class="checkbox-grid" id="post-utilities-grid">
+              <label class="checkbox-card"><input type="checkbox" value="Máy lạnh" class="post-util-checkbox"> Máy lạnh</label>
+              <label class="checkbox-card"><input type="checkbox" value="WC riêng" class="post-util-checkbox"> WC riêng</label>
+              <label class="checkbox-card"><input type="checkbox" value="Kệ bếp" class="post-util-checkbox"> Kệ bếp</label>
+              <label class="checkbox-card"><input type="checkbox" value="Ban công" class="post-util-checkbox"> Ban công</label>
+              <label class="checkbox-card"><input type="checkbox" value="Gác lửng" class="post-util-checkbox"> Gác lửng</label>
+              <label class="checkbox-card"><input type="checkbox" value="Thang máy" class="post-util-checkbox"> Thang máy</label>
+              <label class="checkbox-card"><input type="checkbox" value="Bảo vệ" class="post-util-checkbox"> Bảo vệ</label>
+              <label class="checkbox-card"><input type="checkbox" value="Giờ giấc tự do" class="post-util-checkbox"> Giờ giấc tự do</label>
+              <label class="checkbox-card"><input type="checkbox" value="Không chung chủ" class="post-util-checkbox"> Không chung chủ</label>
+              <label class="checkbox-card"><input type="checkbox" value="Máy giặt" class="post-util-checkbox"> Máy giặt</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="form-label">Đối tượng cho thuê nhắm đến</span>
+            <div class="audience-row">
+              <label class="audience-option"><input type="checkbox" value="Sinh viên" class="post-suitable-checkbox"> Sinh viên học tập</label>
+              <label class="audience-option"><input type="checkbox" value="Người đi làm" class="post-suitable-checkbox"> Nhân viên văn phòng / Người đi làm</label>
+              <label class="audience-option"><input type="checkbox" value="Gia đình" class="post-suitable-checkbox"> Hộ gia đình nhỏ</label>
+            </div>
+          </div>
+        </section>
+
+        <section class="post-form-section">
+          <h2 class="form-section-title"><span class="section-number">4</span> Hình ảnh căn phòng cho thuê</h2>
+          <div id="file-drop-zone" class="drop-zone">
+            <input type="file" id="post-file-input" class="file-input-hidden" accept="image/*" multiple>
+            <div>
+              <p class="drop-title">Kéo thả ảnh phòng trọ của bạn vào đây</p>
+              <p class="drop-subtitle">Hoặc bấm để chọn ảnh từ thư mục, hỗ trợ JPG/PNG và tối đa 5 ảnh.</p>
+            </div>
+            <div id="file-previews-container" class="file-preview-list hidden"></div>
+          </div>
+        </section>
+
+        <section class="post-form-section">
+          <h2 class="form-section-title"><span class="section-number">5</span> Thông tin người đăng và liên hệ</h2>
+
+          <div class="form-row form-row-two">
+            <div class="form-group">
+              <label class="form-label" for="post-owner-name">Họ tên người liên hệ <span class="required-mark">*</span></label>
+              <input type="text" id="post-owner-name" class="form-input" placeholder="Ví dụ: Anh Tuấn">
+              <span class="error-msg" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-owner-phone">Số điện thoại <span class="required-mark">*</span></label>
+              <input type="tel" id="post-owner-phone" class="form-input" placeholder="Ví dụ: 0912 345 678">
+              <span class="error-msg" id="phone-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="post-description">Mô tả giới thiệu chi tiết <span class="required-mark">*</span></label>
+            <textarea id="post-description" class="form-textarea" rows="5" placeholder="Ví dụ: Mô tả vị trí giao thông, có hầm để xe máy, chi phí nước sinh hoạt hoặc quy định giờ giấc tối..."></textarea>
+            <span class="error-msg" id="description-error"></span>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <a href="rooms.html" class="btn-cancel">Hủy tin đăng</a>
+          <button type="submit" class="btn-submit">
+            Đăng tin cho khách duyệt ngay
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var postForm = document.getElementById("post-room-form");
+
+        var postTitle = document.getElementById("post-title");
+        var postType = document.getElementById("post-type");
+        var postPrice = document.getElementById("post-price");
+        var postArea = document.getElementById("post-area");
+        var postDistrict = document.getElementById("post-district");
+        var postWard = document.getElementById("post-ward");
+        var postAddress = document.getElementById("post-address-detail");
+        var postName = document.getElementById("post-owner-name");
+        var postPhone = document.getElementById("post-owner-phone");
+        var postDesc = document.getElementById("post-description");
+
+        var titleError = document.getElementById("title-error");
+        var typeError = document.getElementById("type-error");
+        var priceError = document.getElementById("price-error");
+        var areaError = document.getElementById("area-error");
+        var districtError = document.getElementById("district-error");
+        var wardError = document.getElementById("ward-error");
+        var addressError = document.getElementById("address-error");
+        var nameError = document.getElementById("name-error");
+        var phoneError = document.getElementById("phone-error");
+        var descError = document.getElementById("description-error");
+
+        function kiemTraDuLieu(event) {
+            event.preventDefault(); 
+
+            titleError.innerText = "";
+            typeError.innerText = "";
+            priceError.innerText = "";
+            areaError.innerText = "";
+            districtError.innerText = "";
+            wardError.innerText = "";
+            addressError.innerText = "";
+            nameError.innerText = "";
+            phoneError.innerText = "";
+            descError.innerText = "";
+
+            var laHopLe = true; 
+
+            if (postTitle.value.trim() === "") {
+                titleError.innerText = "Vui lòng nhập tiêu đề tin đăng!";
+                laHopLe = false;
+            }
+            if (postType.value === "") {
+                typeError.innerText = "Vui lòng chọn loại hình phòng trọ!";
+                laHopLe = false;
+            }
+            if (postPrice.value.trim() === "") {
+                priceError.innerText = "Vui lòng nhập giá thuê căn hộ!";
+                laHopLe = false;
+            } else if (isNaN(postPrice.value) || Number(postPrice.value) < 500000) {
+                priceError.innerText = "Giá thuê phòng trọ tối thiểu phải từ 500,000 VND!";
+                laHopLe = false;
+            }
+            if (postArea.value.trim() === "") {
+                areaError.innerText = "Vui lòng nhập diện tích phòng!";
+                laHopLe = false;
+            } else if (isNaN(postArea.value)) {
+                areaError.innerText = "Diện tích phải là một chữ số hợp lệ!";
+                laHopLe = false;
+            }
+            if (postDistrict.value === "") {
+                districtError.innerText = "Vui lòng chọn quận/huyện tương ứng!";
+                laHopLe = false;
+            }
+            if (postWard.value.trim() === "") {
+                wardError.innerText = "Vui lòng nhập thông tin phường/xã!";
+                laHopLe = false;
+            }
+            if (postAddress.value.trim() === "") {
+                addressError.innerText = "Vui lòng cung cấp địa chỉ số nhà và tên đường chi tiết!";
+                laHopLe = false;
+            }
+            if (postName.value.trim() === "") {
+                nameError.innerText = "Vui lòng cung cấp họ tên người liên hệ!";
+                laHopLe = false;
+            }
+            if (postPhone.value.trim() === "") {
+                phoneError.innerText = "Vui lòng điền số điện thoại liên hệ!";
+                laHopLe = false;
+            }
+            if (postDesc.value.trim() === "") {
+                descError.innerText = "Vui lòng viết đoạn mô tả thông tin giới thiệu căn phòng!";
+                laHopLe = false;
+            }
+
+            if (laHopLe) {
+                alert("Đặt hàng thành công!"); 
+                postForm.reset(); 
+            }
+        }
+
+        if (postForm) {
+            postForm.addEventListener("submit", kiemTraDuLieu);
+        }
+    });
+  </script>
+
+  <script src="./js/components.js" data-page="post-room"></script>
+  <script src="./js/rooms-data.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
