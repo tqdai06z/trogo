@@ -1,21 +1,17 @@
 {
-  "name": "roomie-ai-payment-backend",
+  "name": "roomie-payment-api",
   "version": "1.0.0",
-  "description": "Backend API tích hợp cổng thanh toán payOS cho Roomie AI",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
-  },
-  "dependencies": {
-    "@payos/node": "^1.0.8",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "start": "node server.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.x"
   },
-  "author": "Roomie AI Team",
-  "license": "MIT"
+  "dependencies": {
+    "@payos/node": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest"
+  }
 }
