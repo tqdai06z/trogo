@@ -1,0 +1,37 @@
+/*
+ * Roomie - Định dạng giao diện khung Đăng nhập / Đăng ký
+ */
+
+/* Trạng thái bình thường của ô nhập liệu (Email, Mật khẩu) */
+.auth-input {
+  background-color: #ffffff;      /* Màu nền trắng rõ ràng, dễ nhìn */
+  border: 1px solid #cccccc;      /* Viền màu xám nhạt căn bản */
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;     /* Hiệu ứng mượt mà khi đổi trạng thái */
+}
+
+/* Hiệu ứng khi người dùng click chuột vào ô nhập liệu (Focus) */
+.auth-input:focus {
+  border-color: #007bff;          /* Viền chuyển sang màu xanh thương hiệu chủ đạo */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng xanh nhẹ bao quanh ô nhập */
+  outline: none;                  /* Bỏ đường viền đen mặc định của trình duyệt */
+}
+
+/* Định dạng trạng thái bình thường của nút đăng nhập bằng Google */
+.oauth-btn {
+  background-color: #f8f9fa;      /* Màu nền xám trắng nhẹ */
+  border: 1px solid #dddfe2;      /* Đường viền mỏng tinh tế */
+  color: #333333;                 /* Màu chữ xám đậm dễ đọc */
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;               
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+
+.oauth-btn:hover {
+  background-color: #e9ecef;     
+  border-color: #cccccc;          
+}

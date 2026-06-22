@@ -238,7 +238,7 @@
       orderCode = localStorage.getItem("roomie_current_order_code");
     }
 
-    const BACKEND_URL = window.ROOMIE_BACKEND_URL || "https://YOUR_RENDER_BACKEND_URL.onrender.com";
+    const BACKEND_URL = window.location.origin; // window.location.origin hỗ trợ môi trường AI Studio localhost
 
     // Chạy việc check trạng thái ngay khi mở màn hình
     document.addEventListener("DOMContentLoaded", function() {
