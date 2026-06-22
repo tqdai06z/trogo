@@ -17,7 +17,7 @@ async function createPayOSPayment(room, bookingInfo) {
     // Khi bạn đã deploy thành công backend lên Render, hãy đổi giá trị này thành URL Render của bạn.
     // Ví dụ: const BACKEND_URL = "https://roomie-ai-payment-api.onrender.com";
     // =========================================================================
-    const BACKEND_URL = "http://localhost:10000";
+    const BACKEND_URL = "https://payment-api-bvy2.onrender.com";
 
     // Đảm bảo mã đơn hàng (orderCode) là số nguyên dương ngẫu nhiên (payOS đòi hỏi orderCode kiểu Number và duy nhất)
     const orderCode = Math.floor(100000 + Math.random() * 900000); 
